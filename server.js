@@ -26,7 +26,6 @@ app.get('/', async (req, res) => {
     }));
     res.json(formatted);
   } catch (err) {
-    console.error(err);
     res.status(500).json({ error: 'Failed to fetch' });
   } finally {
     if (client) await client.close();
@@ -41,7 +40,7 @@ app.post('/', async (req, res) => {
     const db = client.db(dbName);
     const collection = db.collection('passwords');
     const { site, username, password } = req.body;
-    const result = await collection.insertOne({ site, username, password });
+    const result = await collection.insertOne({ site, username, password, createdAt: new Date() });
     res.json({ id: result.insertedId.toString(), site, username, password });
   } catch (err) {
     res.status(500).json({ error: 'Failed to save' });
@@ -60,7 +59,7 @@ app.put('/', async (req, res) => {
     const { id, site, username, password } = req.body;
     const result = await collection.updateOne(
       { _id: new ObjectId(id) },
-      { $set: { site, username, password } }
+      { $set: { site, username, password, updatedAt: new Date() } }
     );
     if (result.matchedCount === 0) return res.status(404).json({ error: 'Not found' });
     res.json({ id, site, username, password });
