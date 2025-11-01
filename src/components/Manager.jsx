@@ -4,7 +4,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { BiCopy, BiEdit, BiTrash, BiLockAlt } from "react-icons/bi";
 
 // Use .env or fallback
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:4000";
+const API_URL = "https://passworld-backend.vercel.app";
 const CORRECT_PIN = "627426";
 
 const Manager = () => {
@@ -347,5 +347,6 @@ const Manager = () => {
     </>
   );
 };
+
 
 export default Manager;
