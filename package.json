@@ -9,3 +9,9 @@
     "mongodb": "^6.9.0"
   }
 }
+{
+  "scripts": {
+    "build": "vite build",
+    "dev": "vite"
+  }
+}
